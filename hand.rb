@@ -59,7 +59,7 @@ class Hand
     self.straight && self.flush
   end
 
-  def four_of_a_kind
+  def four_of_kind
     value_frequency.each do |key, value|
       return key if value == 4
     end
@@ -100,7 +100,7 @@ class Hand
   def straight_high_ace
     #convert cards to index values
     card_index = our_values.map {|value| Card::values.index(value) }
-    return high_card if card_index.max - card_index.min = 4
+    return high_card if card_index.max - card_index.min == 4
     
     nil
   end
@@ -116,7 +116,7 @@ class Hand
     result ? :five : nil
   end
 
-  def three_of_a_kind
+  def three_of_kind
     value_frequency.each do |key, value|
       return key if value == 3
     end

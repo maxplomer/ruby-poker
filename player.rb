@@ -27,7 +27,8 @@ class Player
       input = gets.chomp.strip
 
       if input == "fold"
-        return false 
+        fold(game)
+        return nil 
       elsif input == "see"
         place_bet(game, game.current_bet)
       elsif input.split[0] == "raise"
@@ -47,10 +48,16 @@ class Player
     nil  
   end
 
+  def fold(game)
+    game.bets.delete(self)
+    nil
+  end
+
   def place_bet(game, bet_amt)
     raise "player can't cover bet" if bet_amt > @bankroll
     game.take_bet(self, bet_amt)
     @bankroll -= bet_amt
+    nil
   end
   
 end

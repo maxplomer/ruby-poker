@@ -4,7 +4,7 @@ require_relative 'player'
 
 class Game
 
-  attr_reader :current_bet
+  attr_reader :current_bet, :bets
 
   def initialize(deck, players)
   	@deck = deck
@@ -24,6 +24,7 @@ class Game
     #set current bet to zero, and bets hash to empty
     #alive_player is empty hash
     @current_bet = 0
+    @pot = 0
     @bets = Hash.new(0)
 
     #players bet
@@ -35,6 +36,7 @@ class Game
   def take_bets(player, bet_amt)
     @bets[player] += bet_amt
     @current_bet = @bets.values.max
+    @pot += bet_amt
   end
 
   def next_player

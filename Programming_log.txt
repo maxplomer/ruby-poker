@@ -1,4 +1,6 @@
--is my Hand::deal_from(deck) method actually taking cards out of the deck?
+- is my Hand::deal_from(deck) method actually taking cards out of the deck?
+
+  actually when we call deck.take, we are not calling the normal array.take function that doesn't actually remove things from an array
 
 -
 

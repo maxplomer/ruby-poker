@@ -1,3 +1,7 @@
+require_relative 'hand'
+require_relative 'deck'
+require_relative 'player'
+
 class Game
 
   def initialize(deck, players)
@@ -8,11 +12,14 @@ class Game
   end
 
   def play
-  	@players.each do |player|
-      player.hand = Hand::deal_from(@deck)
-  	end
+  	@players.each do |player| 
+      player.hand = Hand::deal_from(@deck) 
+      p player.hand.our_values
+    end
     
 
+    
+    
   end
 
 
@@ -28,6 +35,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
   deck = Deck.new
+  deck.shuffle!
   players = [
     Player.new("Jon", 1000),
     Player.new("Tom", 1000)

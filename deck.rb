@@ -38,4 +38,8 @@ class Deck
      @cards += cards
   end
 
+  def shuffle!
+    @cards.shuffle!
+  end
+
 end

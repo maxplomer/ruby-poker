@@ -13,6 +13,16 @@ cards = [
 ]
 
 
-hand = Hand.new(cards)
+hand1 = Hand.new(cards)
 
-p hand.find_my_hand
+cards = [
+  Card.new(:clubs, :nine),
+  Card.new(:clubs, :eight),
+  Card.new(:clubs, :queen),
+  Card.new(:clubs, :jack),
+  Card.new(:clubs, :ten),
+]
+
+hand2 = Hand.new(cards)
+
+p hand1.beats?(hand2)

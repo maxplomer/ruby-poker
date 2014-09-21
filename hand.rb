@@ -31,10 +31,13 @@ class Hand
     other_hand, other_high_card = other_hand.find_my_hand
     
     hand_index = HANDS.index(hand)
-    other_hand_index = Hands.index(other_hand)
+    other_hand_index = HANDS.index(other_hand)
+
+    high_card_index = Card.values.index(high_card)
+    other_high_card_index = Card.values.index(other_high_card)
     
     return true if hand_index > other_hand_index
-    return true if high_card > other_high_card && hand_index == other_hand_index
+    return true if high_card_index > other_high_card_index && hand_index == other_hand_index
     
     false #determine tie by neither hand beating the other
   end
@@ -43,7 +46,6 @@ class Hand
     result = [:high_card, high_card]
     
     for i in 1..(HANDS.size - 1)
-      puts HANDS[i]
       result = [HANDS[i], send(HANDS[i])] if send(HANDS[i])
     end
       

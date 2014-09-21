@@ -26,14 +26,16 @@ class Hand
   end
 
   def beats?(other_hand)
-    #result =
+    hand, high_card = self.find_my_hand
+    other_hand, other_high_card = other_hand.find_my_hand
     
-    #have list of hands in order, get index value, if one higher
-    #than other return winner
-    #if tie, then take high card, deal with draw
+    hand_index = HANDS.index(hand)
+    other_hand_index = Hands.index(other_hand)
     
+    return true if hand_index > other_hand_index
+    return true if high_card > other_high_card && hand_index == other_hand_index
     
-    
+    false #determine tie by neither hand beating the other
   end
 
   def find_my_hand
@@ -46,42 +48,75 @@ class Hand
     result
   end
 
+##### Hand functions, that return relavent highcard for tie
+##### returns nil if don't have that hand
 
-  def royal_flush?
+  def royal_flush
+      self.straight && self.flush && high_card == :ace
   end
 
-  def straight_flush?
+  def straight_flush
     self.straight && self.flush
   end
 
-  def four_of_a_kind?
+  def four_of_a_kind
+    value_frequency.each do |key, value|
+      return key if value == 4
+    end
+      
+    nil
   end
 
-  def full_house?
-    #return [true, highest pair card] 
+  def full_house
+    vals = value_frequency.values
+    if vals.include?(3) && vals.include?(2)
+      return value_frequency.key(3)
+    end
+    
+    nil
   end
 
-  def flush?
+  def flush
     #all the same suit ? 
     first_suit = @cards[0].suit
     result = true
+    
     (1..4).each do |i|
       unless @cards[i].suit == first_suit
         result = false
       end
     end
-    result #tie decided by high_card
-  end
-
-  def straight?
-    #ace can be in beginning or at end
-    p Card.values
     
-
-    #lowest_card = 
+    result ? high_card : nil  #tie decided by high_card
   end
 
-  def three_of_a_kind?
+  def straight
+    return straight_high_ace if straight_high_ace
+    return straight_low_ace if straight_low_ace
+    
+    nil
+  end
+
+  def straight_high_ace
+    #convert cards to index values
+    card_index = our_values.map {|value| Card::values.index(value) }
+    return high_card if card_index.max - card_index.min = 4
+    
+    nil
+  end
+
+  def straight_low_ace
+    cards_need = [:ace, :deuce, :three, :four, :five]
+    result = true
+      
+    cards_need.each do |card|
+      result = false unless our_values.include?(card)
+    end
+      
+    result ? :five : nil
+  end
+
+  def three_of_a_kind
     value_frequency.each do |key, value|
       return key if value == 3
     end
@@ -89,7 +124,7 @@ class Hand
     nil
   end
 
-  def two_pair?
+  def two_pair
     pair_values = []
       
     value_frequency.each do |key, value|

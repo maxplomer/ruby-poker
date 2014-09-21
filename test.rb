@@ -13,7 +13,9 @@ hand = Hand::deal_from(deck)
 
 p hand.cards
 
-p hand.flush
+#p hand.flush
 
 #p hand.straight
+
+p hand.our_values
 

@@ -17,6 +17,15 @@ class Player
     self.hand = nil
   end
 
+  def bet(game)
+    puts "Current bet is $" + game.current_bet
+    puts "type 'fold' to fold"
+    puts "type 'see' to see current bet"
+    puts "type 'raise 100' to raise bet $100"
+
+
+  end
+
   def place_bet(dealer, bet_amt)
     raise "player can't cover bet" if bet_amt > @bankroll
     dealer.take_bet(self, bet_amt)

@@ -4,20 +4,29 @@ require_relative 'player'
 
 class Game
 
+  attr_reader :current_bet
+
   def initialize(deck, players)
   	@deck = deck
   	@players = players
     @current_player = 0
     @pot = 0
+    @current_bet = 0
   end
 
   def play
+    #each player is dealt five cards
   	@players.each do |player| 
       player.hand = Hand::deal_from(@deck) 
-      p player.hand.our_values
     end
-    
 
+    #set current bet to zero
+    @current_bet = 0
+
+    #players bet
+    @players.each do |player| 
+      player.bet(self)
+    end
     
     
   end

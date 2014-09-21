@@ -12,6 +12,7 @@ class Game
     @current_player = 0
     @pot = 0
     @current_bet = 0
+    @bets = Hash.new(0)
   end
 
   def play
@@ -20,24 +21,25 @@ class Game
       player.hand = Hand::deal_from(@deck) 
     end
 
-    #set current bet to zero
+    #set current bet to zero, and bets hash to empty
+    #alive_player is empty hash
     @current_bet = 0
+    @bets = Hash.new(0)
 
     #players bet
     @players.each do |player| 
       player.bet(self)
-    end
-    
-    
+    end    
   end
 
-
+  def take_bets(player, bet_amt)
+    @bets[player] += bet_amt
+    @current_bet = @bets.values.max
+  end
 
   def next_player
     @current_player = (@current_player + 1) % @player.count
   end
-
-
 
 end
 

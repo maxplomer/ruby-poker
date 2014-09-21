@@ -11,7 +11,8 @@ class Hand
     :flush,
     :full_house,
     :four_of_kind,
-    :straight_flush
+    :straight_flush,
+    :royal_flush
   ]
     
 
@@ -42,6 +43,7 @@ class Hand
     result = [:high_card, high_card]
     
     for i in 1..(HANDS.size - 1)
+      puts HANDS[i]
       result = [HANDS[i], send(HANDS[i])] if send(HANDS[i])
     end
       
@@ -52,7 +54,9 @@ class Hand
 ##### returns nil if don't have that hand
 
   def royal_flush
-      self.straight && self.flush && high_card == :ace
+    return :ace if self.straight && self.flush && high_card == :ace
+
+    nil
   end
 
   def straight_flush

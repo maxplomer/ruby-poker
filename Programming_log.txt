@@ -1,0 +1,27 @@
+-is my Hand::deal_from(deck) method actually taking cards out of the deck?
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-

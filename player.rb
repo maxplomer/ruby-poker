@@ -34,15 +34,13 @@ class Player
         fold(game)
         return nil 
       elsif input == "see"
-        bet_amt = game.current_bet 
-                - game.how_much_bet(self)
+        bet_amt = game.current_bet - game.how_much_bet(self)
         place_bet(game, bet_amt)
       elsif input.split[0] == "raise"
+        raise "invalid input" if input.split.size != 2
         raise_amount = input.split[1].to_i  
         raise "invalid input" if raise_amount <= 0
-        bet_amt = raise_amount 
-                + game.current_bet 
-                - game.how_much_bet(self)
+        bet_amt = raise_amount + game.current_bet - game.how_much_bet(self)
         place_bet(game, bet_amt)
       else
         raise "invalid input"

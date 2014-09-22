@@ -37,7 +37,8 @@ class Hand
     other_high_card_index = Card.values.index(other_high_card)
     
     return true if hand_index > other_hand_index
-    return true if high_card_index > other_high_card_index && hand_index == other_hand_index
+    return true if high_card_index > other_high_card_index && 
+                   hand_index == other_hand_index
     
     false #determine tie by neither hand beating the other
   end

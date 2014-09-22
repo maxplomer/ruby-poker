@@ -2,7 +2,7 @@
 
   actually when we call deck.take, we are not calling the normal array.take function that doesn't actually remove things from an array
 
--
+- tie, will have to split pot between tie players
 
 -
 

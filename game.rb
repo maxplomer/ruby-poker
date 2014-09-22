@@ -16,25 +16,31 @@ class Game
   end
 
   def play
-    deal_to_players
-  	
-    #set current bet and pot to zero, and bets hash to empty
-    @current_bet = 0
-    @pot = 0
-    set_bets_hash
+    until one_player_has_all_money
+      puts "New Hand"
+      deal_to_players
+    	
+      #set current bet and pot to zero, and bets hash to empty
+      @current_bet = 0
+      @pot = 0
+      set_bets_hash
 
-    players_bet
-    players_discard
-    players_bet
+      players_bet
+      players_discard
+      players_bet
 
-    ### determine winner, give them all the money
-    ### have some sort of output saying results
-    ### put inside loop that says
-    ### until one player has all the money
-
-
-
-    
+      
+      #now divide pot among winners
+      winners.each do |winner|
+        winner.pay_winnings(@pot / winners.size)
+      end
+      
+      puts "the pot is #{@pot}"
+      puts "the winners are:"
+      winners.each do |winner|
+        puts winner.name 
+      end
+    end
   end
 
   ##### Start - functions called in play method #####
@@ -66,6 +72,27 @@ class Game
     @players.each do |player| 
       player.discard(@deck)
     end
+  end
+
+  def winners
+    winners = @players.dup
+
+    for i in 0..(winners.size - 2)
+      for j in (i+1)..(winners.size - 1)
+        next if winners[i].nil? || winners[j].nil?
+        if winners[i].hand.beats?(winners[j].hand.beats?)
+          winners[j] = nil
+        elsif winners[j].hand.beats?(winners[i].hand.beats?)
+          winners[i] = nil
+        end
+      end
+    end
+
+    winners.compact
+  end
+
+  def one_player_has_all_money
+    @players.select{|i| i.bankroll > 0}.size == 1
   end
 
 ##### End - functions called in play method #####

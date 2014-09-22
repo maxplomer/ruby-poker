@@ -19,8 +19,12 @@ class Player
 
   def bet(game)
     begin 
+      return if @bankroll == 0
+      puts "Hi #{:name}"
+      display_cards
       puts "Current bet is $" + game.current_bet.to_s
       puts "You have bet $" + game.how_much_bet(self).to_s
+      puts "You have $#{@bankroll} in bank"
       puts "type 'fold' to fold"
       puts "type 'see' to see current bet"
       puts "type 'raise 100' to raise bet $100"
@@ -63,11 +67,7 @@ class Player
 
   def discard(deck)
     begin
-      puts "Here are your cards"
-
-      @hand.cards.each_with_index do |card, index|
-        puts "Card #{index}: #{card.value} of #{card.suit}"
-      end
+      display_cards
       
       puts "enter the indices to discard (ex: 1,3,4 ) "
       i_discard = gets.chomp.split(',').map(&:to_i)
@@ -92,6 +92,14 @@ class Player
     rescue 
       puts "You messed up try again"
       retry
+    end
+  end
+
+  def display_cards
+    puts "Here are your cards"
+
+    @hand.cards.each_with_index do |card, index|
+      puts "Card #{index}: #{card.value} of #{card.suit}"
     end
   end
 

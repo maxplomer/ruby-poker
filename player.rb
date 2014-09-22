@@ -88,6 +88,7 @@ class Player
       deck.return(return_cards)
 
       @hand.cards = keep_cards + deck.take(n_discard)
+      display_cards
     rescue 
       puts "You messed up try again"
       retry

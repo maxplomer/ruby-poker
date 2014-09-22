@@ -80,9 +80,9 @@ class Game
     for i in 0..(winners.size - 2)
       for j in (i+1)..(winners.size - 1)
         next if winners[i].nil? || winners[j].nil?
-        if winners[i].hand.beats?(winners[j].hand.beats?)
+        if winners[i].hand.beats?(winners[j].hand)
           winners[j] = nil
-        elsif winners[j].hand.beats?(winners[i].hand.beats?)
+        elsif winners[j].hand.beats?(winners[i].hand)
           winners[i] = nil
         end
       end

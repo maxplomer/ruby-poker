@@ -4,7 +4,9 @@
 
 - tie, will have to split pot between tie players
 
--
+- might want to rig the deck and players in a test file to make sure ties and splits the money properly
+
+  or just don't shuffle
 
 -
 

@@ -20,7 +20,7 @@ class Player
   def bet(game)
     begin 
       return if @bankroll == 0
-      puts "Hi #{:name}"
+      puts "Hi #{@name}"
       display_cards
       puts "Current bet is $" + game.current_bet.to_s
       puts "You have bet $" + game.how_much_bet(self).to_s

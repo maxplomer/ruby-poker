@@ -20,7 +20,6 @@ class Player
   def bet(game)
     begin 
       return if @bankroll == 0
-      puts "Hi #{@name}"
       display_cards
       puts "Current bet is $" + game.current_bet.to_s
       puts "You have bet $" + game.how_much_bet(self).to_s
@@ -96,6 +95,7 @@ class Player
   end
 
   def display_cards
+    puts "Hi #{@name}"
     puts "Here are your cards"
 
     @hand.cards.each_with_index do |card, index|
@@ -106,7 +106,7 @@ class Player
 
   def place_bet(game, bet_amt)
     raise "player can't cover bet" if bet_amt > @bankroll
-    game.take_bet(self, bet_amt)
+    game.take_bets(self, bet_amt)
     @bankroll -= bet_amt
     nil
   end

@@ -21,8 +21,8 @@ class Player
     begin 
       return if @bankroll == 0
       display_cards
-      puts "Current bet is $" + game.current_bet.to_s
-      puts "You have bet $" + game.how_much_bet(self).to_s
+      puts "Current bet is $#{game.current_bet}"
+      puts "You have bet $#{game.how_much_bet(self)}"
       puts "You have $#{@bankroll} in bank"
       puts "type 'fold' to fold"
       puts "type 'see' to see current bet"

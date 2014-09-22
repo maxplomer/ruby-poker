@@ -59,6 +59,7 @@ class Player
 
   def fold(game)
     game.bets.delete(self)
+
     nil
   end
 

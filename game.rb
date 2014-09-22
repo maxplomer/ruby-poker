@@ -4,7 +4,7 @@ require_relative 'player'
 
 class Game
 
-  attr_reader :current_bet #, :bets
+  attr_reader :current_bet, :bets
 
   def initialize(deck, players)
   	@deck = deck

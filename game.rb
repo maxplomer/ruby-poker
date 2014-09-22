@@ -18,18 +18,18 @@ class Game
   def play
     until one_player_has_all_money
       puts "New Hand"
-      deal_to_players
-    	
-      #set current bet and pot to zero, and bets hash to empty
-      @current_bet = 0
-      @pot = 0
+
       set_bets_hash
 
+      @current_bet = 0
+      @pot = 0
+
+      deal_to_players
+    	
       players_bet
       players_discard
       players_bet
 
-      
       #now divide pot among winners
       winners.each do |winner|
         winner.pay_winnings(@pot / winners.size)
@@ -48,12 +48,13 @@ class Game
   def set_bets_hash
     @bets = {}
     @players.each do |player|
+      next if player.bankroll == 0
       @bets[player] = 0
     end
   end
 
   def deal_to_players #each player is dealt five cards
-    @players.each do |player| 
+    @bets.keys.each do |player| 
       player.hand = Hand::deal_from(@deck) 
     end
   end
@@ -69,13 +70,13 @@ class Game
   end
 
   def players_discard ###didn't write yet
-    @players.each do |player| 
+    @bets.keys.each do |player| 
       player.discard(@deck)
     end
   end
 
   def winners
-    winners = @players.dup
+    winners = @bets.keys.dup
 
     for i in 0..(winners.size - 2)
       for j in (i+1)..(winners.size - 1)
